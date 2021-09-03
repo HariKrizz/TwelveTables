@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 18px;
+  padding: 0px;
+  color: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */ 
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+
+.col-25 {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.container {
+  background-color:snow;
+  padding: 25px 20px 20px 20px;
+  width:100%;
+  align-self: center;
+  box-shadow: tomato;
+}
+
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+a { color: #1973bd; }
+
+a.del { color: rgba(255, 0, 0, 0.829); }
+
+hr { border: 1px solid lightslategrey; }
+
+span.price {
+  float: right;
+  color: darkblue;
+}
+
+@media (max-width:50%) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+</style>
+</head>
+<body>
+<br>
+<h1 style="color:maroon">Checkout Form</h1>
+  <div class="col-25">
+    <div class="container">
+      <h2 style="color: black;">Cart<span class="price" style="color:black">
+        <i class="fa fa-shopping-cart"></i>&nbsp;<b>{{itc}}</b></span></h2>
+        {% for i in c_items  %}
+
+        <p>
+            <a  class="del" href ="{% url 'delete_cart' i.prod.id %}"><i class="fa fa-trash"></i></a>&nbsp;
+            <a href="{{i.prod.get_prod_url}}">
+              <img src="{{i.prod.image.url}}" alt="{{i.prod.name}}" style="width: 60px; height: 50px;">&nbsp;{{i.prod.name}}
+            </a>
+            <span class="price">₹{{i.total}}<br>
+              <b style="color: darkslategray;">
+                <a href="{% url 'decrement_cart' i.prod.id %}"><i class="fa fa-minus-circle" style="font-size: 15px; color: rgba(255, 0, 0, 0.829);"></i></a> 
+                &nbsp; {{i.qty}} &nbsp;
+                <a href="{% url 'add_cart' i.prod.id %}"><i class="fa fa-plus-circle" style="font-size: 15px; color: seagreen"></i></a>
+              </b>
+            </span> 
+        </p>
+          Qty: {{i.qty}}<br> Unit Price: ₹{{i.prod.price}}<br>
+          Stock: {{i.prod.stock}}
+          {% endfor %}
+        <hr>
+        <p><b>Total</b><span class="price"><b>₹ {{c_tot}}</b></span></p>
+      </div>
+    </div>
+    <br>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,7 @@
+from omdbapi.movie_search import GetMovie
+
+
+
+abc = GetMovie(api_key="21cd6894")
+details = abc.get_movie(title="interstellar")
+print(abc)

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"
+            integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We">
+</head>
+
+<style>
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: lightgray;
+  color: aliceblue;
+}
+hr {
+  border: 1px solid  salmon;  
+  margin-bottom: 20px;
+}
+</style> 
+<body>
+<br><br>
+  <br>
+    <div class="container-fluid col-4">
+      <div class="row-cols-md-0 bg-gradient shadow-lg"></div>
+        <form action="login" method="post" class="p-lg-4 shadow-lg" style="background-color:#1a1118" >
+          <br>
+          <center><h3 style="text-transform: none; color: crimson"><b>Log in</b></h3> 
+            {% csrf_token %}
+              <hr><br>
+                <input type="text" class="form-control" name="userName" placeholder="Username" style="width:65%;">
+                  <br>
+                <input type="password" class="form-control" name="passWord" placeholder="Password" style="width:65%;">
+                  <br>
+                  <br>
+                <button class="btn btn-success" style="width:30%; text-transform: none;">Sign In</button><br>          
+                  <br>     
+                <b style="color:salmon">New User? <a href="{% url 'register' %}"> Create new account</a></b><br> 
+          </form>
+            </center>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}  
